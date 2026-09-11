@@ -1,0 +1,126 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+}
+
+/*
+  Monochrome palette — black & white only.
+  Pure grayscale (chroma = 0). Dark by default: near-black background,
+  white foreground/primary, gray neutrals. No hue anywhere.
+*/
+:root {
+  color-scheme: dark;
+  --background: oklch(0.11 0 0);
+  --foreground: oklch(0.96 0 0);
+  --card: oklch(0.15 0 0);
+  --card-foreground: oklch(0.96 0 0);
+  --popover: oklch(0.14 0 0);
+  --popover-foreground: oklch(0.96 0 0);
+  --primary: oklch(0.98 0 0);
+  --primary-foreground: oklch(0.12 0 0);
+  --secondary: oklch(0.22 0 0);
+  --secondary-foreground: oklch(0.96 0 0);
+  --muted: oklch(0.2 0 0);
+  --muted-foreground: oklch(0.68 0 0);
+  --accent: oklch(0.9 0 0);
+  --accent-foreground: oklch(0.12 0 0);
+  --destructive: oklch(0.72 0 0);
+  --destructive-foreground: oklch(0.12 0 0);
+  --success: oklch(0.85 0 0);
+  --success-foreground: oklch(0.12 0 0);
+  --border: oklch(1 0 0 / 14%);
+  --input: oklch(1 0 0 / 20%);
+  --ring: oklch(1 0 0 / 55%);
+  --radius: 0.5rem;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground;
+    /* Custom white "dev" cursor — arrow by default. */
+    cursor: url('/cursor.svg') 3 2, auto;
+  }
+  /* Targeting cursor on interactive elements. */
+  a,
+  button,
+  [role='button'],
+  label[for],
+  select,
+  summary,
+  input[type='submit'],
+  .cursor-pointer {
+    cursor: url('/cursor-pointer.svg') 12 12, pointer;
+  }
+}
+
+@layer utilities {
+  /* Soft white glows used sparingly on the signature elements. */
+  .glow-primary {
+    box-shadow: 0 0 0 1px oklch(1 0 0 / 22%),
+      0 0 24px -4px oklch(1 0 0 / 28%);
+  }
+  .glow-accent {
+    box-shadow: 0 0 0 1px oklch(1 0 0 / 26%),
+      0 0 24px -4px oklch(1 0 0 / 32%);
+  }
+  .text-glow-primary {
+    text-shadow: 0 0 18px oklch(1 0 0 / 35%);
+  }
+  .text-glow-accent {
+    text-shadow: 0 0 18px oklch(1 0 0 / 35%);
+  }
+
+  /* Faint grid backdrop (white lines, low opacity). */
+  .cyber-grid {
+    background-image:
+      linear-gradient(oklch(1 0 0 / 5%) 1px, transparent 1px),
+      linear-gradient(90deg, oklch(1 0 0 / 5%) 1px, transparent 1px);
+    background-size: 44px 44px;
+  }
+
+  @keyframes float-slow {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  .animate-float-slow {
+    animation: float-slow 7s ease-in-out infinite;
+  }
+}
