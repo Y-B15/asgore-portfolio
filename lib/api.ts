@@ -11,8 +11,13 @@
  */
 
 /** Configurable base URL. Set NEXT_PUBLIC_API_URL in your Vercel project. */
-export const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, '') ?? ''
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api';
+
+export async function fetchSkills() {
+  const response = await fetch(`${API_BASE_URL}/skills`);
+  if (!response.ok) throw new Error('Failed to fetch skills');
+  return response.json();
+}
 
 export type SkillCategory = 'engineering' | 'community'
 
