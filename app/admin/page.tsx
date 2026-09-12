@@ -21,7 +21,7 @@ export default function AdminPage() {
   const fetchMessages = async () => {
     setLoading(true)
     try {
-      const res = await fetch('/api/admin/messages', {
+      const res = await fetch('/api/admin/message', {
         cache: 'no-store',
         credentials: 'include',
       })
