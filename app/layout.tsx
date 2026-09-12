@@ -16,14 +16,14 @@ const jetbrainsMono = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'Dev & Guild Architect — C# / ASP.NET Core + Discord Operations',
+  title: 'Dev & Guild Architect Next.js + Discord Operations',
   description:
-    'Portfolio of an ESTSB IT student and professional community manager: software development with C#, ASP.NET Core and SQL, plus Discord guild architecture and community operations.',
+    'Portfolio of an ESTSB IT student and professional community manager: website development with Next.js, plus Discord guild architecture and community operations.',
   generator: 'v0.app',
   keywords: [
-    'C#',
-    'ASP.NET Core',
-    'SQL',
+    'Next.js',
+    'React',
+    'TypeScript',
     'Discord',
     'Community Management',
     'Guild Architecture',
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Dev & Guild Architect — Portfolio',
     description:
-      'Software development (C#, ASP.NET Core, SQL) and Discord community operations.',
+      'Web development (Next.js, React, TypeScript) and Discord community operations.',
     type: 'website',
   },
 }

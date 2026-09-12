@@ -8,16 +8,16 @@ export async function GET() {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
-  // Replace with database query when connected
-  const messages = [
-    {
-      id: 'm1',
-      name: 'Léa Moreau',
-      email: 'lea.moreau@example.com',
-      message: 'Hi! I run a small game project and would love help structuring our Discord server.',
-      receivedAt: '2026-09-08T14:22:00.000Z',
-    },
-  ]
-
-  return NextResponse.json({ success: true, messages })
+  return NextResponse.json({
+    success: true,
+    messages: [
+      {
+        id: '1',
+        name: 'Demo Inquiry',
+        email: 'hello@example.com',
+        message: 'This is a test contact message in your dashboard.',
+        receivedAt: new Date().toISOString(),
+      },
+    ],
+  })
 }

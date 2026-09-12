@@ -41,23 +41,24 @@ export default function AdminPage() {
   }, [])
 
   const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setError('')
+  e.preventDefault()
+  setError('')
 
-    const res = await fetch('/api/admin/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ password }),
-    })
+  const res = await fetch('/api/admin/login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ password }),
+  })
 
-    if (res.ok) {
-      setPassword('')
-      fetchMessages()
-    } else {
-      const data = await res.json()
-      setError(data.error || 'Invalid password')
-    }
+  if (res.ok) {
+    setIsAuth(true)
+    setPassword('')
+    fetchMessages()
+  } else {
+    const data = await res.json()
+    setError(data.error || 'Invalid password')
   }
+}
 
   const handleLogout = async () => {
     await fetch('/api/admin/logout', { method: 'POST' })
