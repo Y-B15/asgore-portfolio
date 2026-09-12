@@ -8,16 +8,17 @@ export interface ContactMessage {
 
 const globalForDb = globalThis as unknown as { messages: ContactMessage[] }
 
-export const messagesStore: ContactMessage[] = globalForDb.messages || [
-  {
-    id: 'sample-1',
-    name: 'Léa Moreau',
-    email: 'lea.moreau@example.com',
-    message: 'Hi! I need help structuring our Discord server.',
-    receivedAt: new Date().toISOString(),
-  },
-]
+export const messagesStore: ContactMessage[] = globalForDb.messages || []
 
 if (process.env.NODE_ENV !== 'production') {
   globalForDb.messages = messagesStore
+}
+
+export function deleteMessage(id: string): boolean {
+  const index = messagesStore.findIndex((m) => m.id === id)
+  if (index !== -1) {
+    messagesStore.splice(index, 1)
+    return true
+  }
+  return false
 }

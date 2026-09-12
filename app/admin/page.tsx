@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { ShieldAlert, Mail, LogOut, RefreshCw } from 'lucide-react'
+import { ShieldAlert, Mail, LogOut, RefreshCw, Trash2 } from 'lucide-react'
 
 interface ContactMessage {
   id: string
@@ -48,22 +48,28 @@ export default function AdminPage() {
     e.preventDefault()
     setError('')
 
-    try {
-      const res = await fetch('/api/admin/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ password }),
-      })
+    const res = await fetch('/api/admin/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password }),
+    })
 
-      if (res.ok) {
-        setPassword('')
-        await fetchMessages()
-      } else {
-        const data = await res.json()
-        setError(data.error || 'Invalid password')
-      }
-    } catch {
-      setError('An error occurred during authentication')
+    if (res.ok) {
+      setPassword('')
+      fetchMessages()
+    } else {
+      const data = await res.json()
+      setError(data.error || 'Invalid password')
+    }
+  }
+
+  const handleDelete = async (id: string) => {
+    const res = await fetch(`/api/admin/message?id=${id}`, {
+      method: 'DELETE',
+    })
+
+    if (res.ok) {
+      setMessages((prev) => prev.filter((m) => m.id !== id))
     }
   }
 
@@ -137,9 +143,18 @@ export default function AdminPage() {
                   <span className="font-semibold">{msg.name}</span>
                   <span className="text-xs text-muted-foreground">({msg.email})</span>
                 </div>
-                <span className="font-mono text-xs text-muted-foreground">
-                  {new Date(msg.receivedAt).toLocaleDateString()}
-                </span>
+                <div className="flex items-center gap-3">
+                  <span className="font-mono text-xs text-muted-foreground">
+                    {new Date(msg.receivedAt).toLocaleDateString()}
+                  </span>
+                  <button
+                    onClick={() => handleDelete(msg.id)}
+                    className="text-muted-foreground hover:text-destructive transition-colors"
+                    title="Delete message"
+                  >
+                    <Trash2 className="size-4" />
+                  </button>
+                </div>
               </div>
               <p className="text-sm text-muted-foreground">{msg.message}</p>
             </div>
