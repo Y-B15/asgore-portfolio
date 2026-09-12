@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { isAuthenticated } from '@/lib/auth'
+import { messagesStore } from '@/lib/db'
 
 export async function GET() {
   const authenticated = await isAuthenticated()
@@ -8,16 +9,5 @@ export async function GET() {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
-  return NextResponse.json({
-    success: true,
-    messages: [
-      {
-        id: '1',
-        name: 'Demo Inquiry',
-        email: 'hello@example.com',
-        message: 'This is a test contact message in your dashboard.',
-        receivedAt: new Date().toISOString(),
-      },
-    ],
-  })
+  return NextResponse.json({ success: true, messages: messagesStore })
 }
