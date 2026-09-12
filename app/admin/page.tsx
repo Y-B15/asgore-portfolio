@@ -21,7 +21,11 @@ export default function AdminPage() {
   const fetchMessages = async () => {
     setLoading(true)
     try {
-      const res = await fetch('/api/admin/messages')
+      const res = await fetch('/api/admin/messages', {
+        cache: 'no-store',
+        credentials: 'include',
+      })
+
       if (res.ok) {
         const data = await res.json()
         setMessages(data.messages || [])
@@ -41,24 +45,27 @@ export default function AdminPage() {
   }, [])
 
   const handleLogin = async (e: React.FormEvent) => {
-  e.preventDefault()
-  setError('')
+    e.preventDefault()
+    setError('')
 
-  const res = await fetch('/api/admin/login', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ password }),
-  })
+    try {
+      const res = await fetch('/api/admin/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password }),
+      })
 
-  if (res.ok) {
-    setIsAuth(true)
-    setPassword('')
-    fetchMessages()
-  } else {
-    const data = await res.json()
-    setError(data.error || 'Invalid password')
+      if (res.ok) {
+        setPassword('')
+        await fetchMessages()
+      } else {
+        const data = await res.json()
+        setError(data.error || 'Invalid password')
+      }
+    } catch {
+      setError('An error occurred during authentication')
+    }
   }
-}
 
   const handleLogout = async () => {
     await fetch('/api/admin/logout', { method: 'POST' })
