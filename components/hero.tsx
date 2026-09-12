@@ -1,6 +1,6 @@
 import { ArrowRight, Code2, Users } from 'lucide-react'
 
-/** Landing hero highlighting the dual C# dev + Discord operations expertise. */
+/** Landing hero highlighting web development + Discord operations expertise. */
 export function Hero() {
   return (
     <section
@@ -29,8 +29,8 @@ export function Hero() {
         </div>
 
         <h1 className="max-w-4xl text-balance text-4xl font-bold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
-          Building software with{' '}
-          <span className="text-primary text-glow-primary">C#</span> &amp;
+          Building modern websites with{' '}
+          <span className="text-primary text-glow-primary">Next.js</span> &amp;
           architecting{' '}
           <span className="text-accent text-glow-accent">
             thriving communities
@@ -38,9 +38,7 @@ export function Hero() {
         </h1>
 
         <p className="mt-6 max-w-2xl text-pretty text-lg leading-relaxed text-muted-foreground">
-          I engineer backends with ASP.NET Core and SQL by day, and design
-          resilient Discord guild architectures with bots, events and
-          moderation systems by night. Two disciplines, one systems mindset.
+          I craft fast, responsive web applications with Next.js and TypeScript by day, and design resilient Discord guild architectures with bots, events, and moderation systems by night. Two disciplines, one systems mindset.
         </p>
 
         <div className="mt-10 flex flex-wrap items-center gap-4">
@@ -62,9 +60,9 @@ export function Hero() {
         <div className="mt-16 grid max-w-2xl gap-4 sm:grid-cols-2">
           <div className="rounded-lg border border-border bg-card/50 p-5 backdrop-blur">
             <Code2 className="size-6 text-primary" />
-            <h3 className="mt-3 font-semibold">Software Development</h3>
+            <h3 className="mt-3 font-semibold">Web Development</h3>
             <p className="mt-1 font-mono text-xs text-muted-foreground">
-              C# · ASP.NET Core · SQL · Git
+              Next.js · React · TypeScript · Tailwind
             </p>
           </div>
           <div className="rounded-lg border border-border bg-card/50 p-5 backdrop-blur">
