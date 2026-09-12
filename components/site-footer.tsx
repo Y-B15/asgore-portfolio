@@ -21,7 +21,7 @@ export function SiteFooter() {
 
         <div className="flex items-center gap-3">
           <a
-            href="https://github.com"
+            href="https://github.com/Y-B15/asgore-portfolio"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Source code"
